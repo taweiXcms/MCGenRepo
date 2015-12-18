@@ -1,0 +1,6 @@
+step1
+CMSSW_7_1_20_patch3
+cmsDriver.py GenFrag/fragment/python/DYToEE_M_40_TuneCUETP8M1_5TeV_pythia8.py \
+--mc --eventcontent RAWSIM --datatier GEN-SIM --conditions auto:run2_mc --beamspot Nominal5TeVpp2015Collision --step GEN,SIM --customise SLHCUpgradeSimulations/Configuration/postLS1Customs.customisePostLS1 --magField 38T_PostLS1 --no_exec
+
+step2
