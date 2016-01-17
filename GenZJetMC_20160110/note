@@ -1,0 +1,31 @@
+PbPb GEM-SIM:
+CMSSW_7_5_8_patch2
+--conditions 75X_mcRun2_HeavyIon_v12 \
+-s GEN,SIM \
+--pileup_input das:/Hydjet_Quenched_MinBias_5020GeV_750/HiFall15-75X_mcRun2_HeavyIon_v1_75X_mcRun2_HeavyIon_v1-v1/GEN-SIM \
+--pileup_dasoption "--limit 0" \
+-n 1000 --era Run2_HI \
+--eventcontent RAWSIM --scenario HeavyIons \
+--pileup HiMixGEN --datatier GEN-SIM --beamspot MatchHI \
+--customise SLHCUpgradeSimulations/Configuration/postLS1Customs.customisePostLS1_HI \
+--no_exec
+
+PbPb embedded DIGI:
+CMSSW_7_5_8_patch2
+cmsDriver.py step2 --conditions 75X_mcRun2_HeavyIon_v12 --scenario HeavyIons --pileup_input das:/Hydjet_Quenched_MinBias_5020GeV_750/HiFall15-75X_mcRun2_HeavyIon_v1_75X_mcRun2_HeavyIon_v1-v1/GEN-SIM --eventcontent RAWSIM -s DIGI:pdigi_hi,L1,DIGI2RAW,HLT:HIon,RAW2DIGI,L1Reco --datatier GEN-SIM-DIGI-RAW-HLTDEBUG --pileup HiMix --customise SLHCUpgradeSimulations/Configuration/postLS1Customs.customisePostLS1_HI -n 1 --no_exec --pileup_dasoption "--limit 0"
+
+PbPb RECO:
+CMSSW_7_5_8_patch2
+cmsDriver.py step3 --conditions 75X_mcRun2_HeavyIon_v12 --scenario HeavyIons --eventcontent AODSIM -s RAW2DIGI,L1Reco,RECO --datatier GEN-SIM-RECO --customise=SLHCUpgradeSimulations/Configuration/postLS1Customs.customisePostLS1_HI -n 1 --no_exec
+
+pp GEM-SIM:
+CMSSW_7_5_8_patch2
+--mc --eventcontent RAWSIM --customise SLHCUpgradeSimulations/Configuration/postLS1Customs.customisePostLS1 --datatier GEN-SIM --conditions 75X_mcRun2_asymptotic_ppAt5TeV_v3 --beamspot Nominal5TeVpp2015Collision --step GEN,SIM -n 1000 --no_exec
+
+pp DIGI no PU:
+CMSSW_7_5_8_patch2
+cmsDriver.py step2 --conditions 75X_mcRun2_asymptotic_ppAt5TeV_v3 --eventcontent RAWSIM -s DIGI,L1,DIGI2RAW,HLT:PRef,RAW2DIGI,L1Reco --datatier GEN-SIM-RAW --customise SLHCUpgradeSimulations/Configuration/postLS1Customs.customisePostLS1 -n 1 --no_exec
+
+pp RECO:
+CMSSW_7_5_8_patch2
+cmsDriver.py step3 --conditions 75X_mcRun2_asymptotic_ppAt5TeV_v3 --eventcontent AODSIM -s RAW2DIGI,L1Reco,RECO --datatier GEN-SIM-RECO --customise=SLHCUpgradeSimulations/Configuration/postLS1Customs.customisePostLS1 -n 1 --no_exec
